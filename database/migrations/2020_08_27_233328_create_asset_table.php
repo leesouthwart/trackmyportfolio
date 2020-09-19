@@ -16,8 +16,8 @@ class CreateAssetTable extends Migration
         Schema::create('asset', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('Asset Name');
-            $table->string('Ticker Symbol')->nullable();
+            $table->string('asset_name');
+            $table->string('ticker_symbol')->nullable();
             $table->boolean('is_cash')->default(false);
             $table->boolean('is_crypto')->default(false);
             $table->decimal('current_price')->nullable();

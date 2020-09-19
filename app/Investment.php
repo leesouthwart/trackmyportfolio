@@ -26,11 +26,18 @@ class Investment extends Model
         $amount_of_asset = $investment->amount_of_asset + $args['amount_of_asset'];
 
         $total_value = $investment->value  + ($args['amount_of_asset'] * $asset->current_price);
+
+        $gain = $total_value - $value_invested;
+        $percent_gain = ($gain / $value_invested) * 100;
+        
       
         $new_args = [
         'value' => $total_value,
         'average_cost' => $value_invested / $amount_of_asset,
-        'amount_of_asset' => $amount_of_asset
+        'amount_of_asset' => $amount_of_asset,
+        'investment_cost' => $value_invested,
+        'gain' => $gain,
+        'percent_gain' => $percent_gain
         ];
 
         $investment->fill($new_args);

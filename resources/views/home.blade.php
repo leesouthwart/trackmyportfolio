@@ -19,7 +19,8 @@
             </div>
         </div>
     </div>
-
+    
+    @if(isset($port))   
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -34,11 +35,12 @@
             </div>
         </div>
     </div>
+    @endif
 
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ $port->title }}</div>
+                <div class="card-header">Add Investment</div>
 
                 <div class="card-body">
 

@@ -23,7 +23,7 @@ class TransactionController extends Controller
         $validatedData['amount_of_asset'] = $validatedData['value'] / $validatedData['cost'];
         $asset = Asset::find($request['asset_id']);
     
-        $validatedData['asset_name'] = $asset['Asset Name'];
+        $validatedData['asset_name'] = $asset['asset_name'];
 
         $transaction = new Transaction;
         $transaction->fill($validatedData);
@@ -36,6 +36,18 @@ class TransactionController extends Controller
 
         // Get Users portfolio
         $portfolio = Portfolio::where('user_id', $request['user_id'])->first();
+        
+
+        if(!$portfolio) {
+            $portfolio = new Portfolio;
+            $portfolio->user_id = $request['user_id'];
+            $portfolio->title = "Default Portfolio";
+            $portfolio->percent_gain = 0;
+            $portfolio->gain = 0;
+            $portfolio->investment_cost = 0;
+            $portfolio->save();
+        }
+
         $args['portfolio_id'] = $portfolio->id;
         
         // Get Investment model where user id and asset id match
@@ -49,12 +61,18 @@ class TransactionController extends Controller
             $args['average_cost'] = $validatedData['cost'];
             unset($args['cost']);
             $args['value'] = $args['amount_of_asset'] * $asset->current_price;
+            $args['investment_cost'] = $args['amount_of_asset'] * $args['average_cost'];
+            $args['gain'] = $args['value'] - $args['investment_cost'];
+            $args['percent_gain'] = ($args['gain'] / $args['investment_cost']) * 100;
+            
 
             $investment->fill($args);
             $investment->save();
         }
 
         $portfolio->updateHoldings($portfolio);
+
+        return redirect('/home');
 
         // In future -> write a check that sees if an asset_id exists. And if it does not, call a function that creates the asset, runs an api call to populate price data, etc.
     }

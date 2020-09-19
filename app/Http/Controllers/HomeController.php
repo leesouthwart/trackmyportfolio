@@ -29,11 +29,11 @@ class HomeController extends Controller
     public function index()
     {
         $lee = User::where('id', 1)->first();
-        $port = Portfolio::find($lee->id);
+        $port = Portfolio::where('user_id', (Auth()->user()->id))->first();
 
         $investment = Investment::where('user_id', 1)->first();
 
-        $assets = Asset::pluck('Asset Name', 'id')->toArray();
+        $assets = Asset::pluck('asset_name', 'id')->toArray();
         
         
         return view('home', compact('port', 'assets'));
