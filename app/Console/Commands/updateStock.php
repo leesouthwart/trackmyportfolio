@@ -4,27 +4,28 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+
 use App\Asset;
 use App\Investment;
 use App\Portfolio;
 
 use AlphaVantage;
 
-class updateCrypto extends Command
+class updateStock extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'updateprice:crypto';
+    protected $signature = 'updateprice:stock';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update the prices of crypto currency assets';
+    protected $description = 'Update Stock asset prices via Alpha Vantage API';
 
     /**
      * Create a new command instance.
@@ -34,7 +35,6 @@ class updateCrypto extends Command
     public function __construct()
     {
         parent::__construct();
-        
     }
 
     /**
@@ -51,15 +51,17 @@ class updateCrypto extends Command
         
 
         // Get all Assets
-        $assets = Asset::where('is_crypto', 1)->get();
+        $assets = Asset::where('is_crypto', 0)->get();
 
         // Loop through assets
         foreach ($assets as $asset) {
             
-                $ASSET_OBJ = $client->foreignExchange()->currencyExchangeRate($asset->ticker_symbol, 'GBP');
-                $price = $ASSET_OBJ['Realtime Currency Exchange Rate']['9. Ask Price'];
-                 $asset->current_price = $price;
-                 $asset->save();
+                $ASSET_OBJ = $client->TimeSeries()->daily($asset->ticker_symbol);
+                $price = $ASSET_OBJ['Time Series (Daily)'];
+                $price = $price[array_key_first($price)];
+                $price = $price['4. close'];
+                $asset->current_price = $price;
+                $asset->save();
                 print($asset->asset_name . ' updated, ');
 
                 $investments = Investment::where('asset_id', $asset->id)->get();
