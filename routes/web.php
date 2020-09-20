@@ -19,6 +19,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware(['auth'])->group(function() {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/portfolio', 'PortfolioController@index')->name('portfolio');
+    Route::get('/history', 'TransactionController@index')->name('investment_history');
+    //Route::get('/notebook', 'BlogController@index')->name('blog');
+    //Route::get('/goals', 'GoalsController@index')->name('goals');
 
-Route::post('/home/addTransaction', 'TransactionController@store')->name('addTransaction');
+
+    
+    
+    Route::post('/home/addTransaction', 'TransactionController@store')->name('addTransaction');
+});
+
+
+
+

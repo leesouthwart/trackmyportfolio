@@ -15,6 +15,9 @@
  <!-- Scripts -->
  <script src="{{ asset('js/app.js') }}" defer></script>
 
+ <!-- project CSS -->
+ <link rel="stylesheet" href="{{ asset('css/app.css') }}" defer></script>
+
  <!-- Fonts -->
  <link rel="dns-prefetch" href="//fonts.gstatic.com">
  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -26,16 +29,9 @@
     @include('partials.menu')
 
     <div class="c-wrapper">
-        <header class="px-4 c-header c-header-light c-header-fixed justify-content-end">
-            <ul class="c-header-nav d-md-down-none">
-                <li class="c-header-nav-item">
-                    <a class="c-header-nav-link"  href="{{ route('logout') }}"
-                                                            onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}</a>
-                </li>
-            </ul>
-        </header>
+
+        @include('partials.header')
+
         <div class="c-body">
             <main class="c-main">
                 <div class="container-fluid">

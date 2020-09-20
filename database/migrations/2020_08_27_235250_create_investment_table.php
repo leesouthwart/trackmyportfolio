@@ -21,7 +21,7 @@ class CreateInvestmentTable extends Migration
             $table->foreignId('asset_id')->constrained('asset')->onDelete('cascade');
             $table->string('asset_name')->nullable();
             $table->decimal('average_cost')->nullable();
-            $table->decimal('amount_held')->nullable();
+            $table->decimal('amount_held', 12, 8)->nullable();
         });
     }
 

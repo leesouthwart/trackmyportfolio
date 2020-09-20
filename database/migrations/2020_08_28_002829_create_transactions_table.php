@@ -17,10 +17,11 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('asset_id')->constrained('asset');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('asset_name');
             $table->decimal('cost');
             $table->decimal('total_invested');
-            $table->decimal('amount_of_asset');
+            $table->decimal('amount_of_asset', 12, 8);
             $table->boolean('is_recurring')->default(0);
         });
     }

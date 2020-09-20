@@ -12,12 +12,27 @@ use App\Asset;
 class TransactionController extends Controller
 {
     //
+    
+    public function index()
+    {
+        $transactions = Transaction::where('user_id', auth()->user()->id)->get();
+
+        return view('transactions', compact('transactions'));
+    }
+
+    public function edit()
+    {
+        
+    }
+    
+
     public function store(Request $request) {
 
         $validatedData = $request->validate([
             'asset_id' => 'required',
             'cost' => 'required',
             'value' => 'required',
+            'user_id' => 'required'
         ]);
 
         $validatedData['amount_of_asset'] = $validatedData['value'] / $validatedData['cost'];

@@ -1,5 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+.investment-table .table th,
+.investment-table td,
+.investment-table th {
+  vertical-align: middle !important;
+}
+
+.investment-table td .btn-primary {
+  background-color: #50c168;
+  border: 1px solid #50c168;
+  color: white;
+}
+
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
