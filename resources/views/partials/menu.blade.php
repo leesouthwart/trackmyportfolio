@@ -5,7 +5,23 @@
     <ul class="c-sidebar-nav ps ps--active-y">
         
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="/">Dashboard</a>
+            <a class="c-sidebar-nav-link" href="/home">Dashboard</a>
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="/portfolio">Portfolio</a>
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="/goals">Goals</a>
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="/notebook">Notebook</a>
+        </li>
+
+        <li class="c-sidebar-nav-item">
+            <a class="c-sidebar-nav-link" href="/history">Investment History</a>
         </li>
     </ul>
 </div>
