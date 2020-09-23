@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function() {
     //Route::get('/notebook', 'BlogController@index')->name('blog');
     //Route::get('/goals', 'GoalsController@index')->name('goals');
 
-
+    Route::post('transaction/{id}/edit', 'TransactionController@edit')->name('editTransaction');
     
     
     Route::post('/home/addTransaction', 'TransactionController@store')->name('addTransaction');

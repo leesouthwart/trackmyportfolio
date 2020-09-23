@@ -10,7 +10,8 @@
                 <th scope="col">Id</th>
                 <th scope="col">Asset</th>
                 <th scope="col">Amount</th>
-                <th scope="col">Cost</th>
+                <th scope="col">Cost Basis</th>
+                <th scope="col">Investment Value</th>
                 <th scope="col">Date</th>
             </tr>
         </thead>
@@ -23,8 +24,17 @@
                     <td>{{$transaction->asset_name}}</td>
                     <td>{{(float)$transaction->amount_of_asset}}</td>
                     <td>{{$transaction->cost}}</td>
+                    <td>{{$transaction->value}}</td>
                     <td>{{$transaction->created_at->format('d-m-Y')}}</td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transactionModal" data-edit={{@$transaction->id}}>Edit</button></td>
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transactionModal"
+                        data-asset="{{$transaction->asset_name}}" 
+                        data-id="{{@$transaction->id}}"
+                        data-asset_id="{{$transaction->asset_id}}"
+                        data-asset_amount={{$transaction->amount_of_asset}}
+                        data-cost={{$transaction->cost}}
+                        data-transaction_id={{$transaction->id}}
+                        data-inv-val={{$transaction->value}}
+                    >Edit</button></td>
                 </tr>
                 @php $count++ @endphp
              @endforeach

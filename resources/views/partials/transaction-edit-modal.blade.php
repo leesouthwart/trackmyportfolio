@@ -1,4 +1,4 @@
-<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,21 +8,38 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+        <form action="" class="modal-form-action" method="post">
+          @csrf
+          <input type="hidden" name="id" class="hidden-id" value="">
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Recipient:</label>
-              <input type="text" class="form-control" id="recipient-name">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <label for="recipient-name" class="col-form-label">Asset:</label>
+                  <select type="number" name="asset_id" class="modal-dropdown">
+                    @foreach($assets as $key => $value)
+                    <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                  </select>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="recipient-name" class="col-form-label">Cost Basis:</label>
+                  <input type="text" name="cost" class="modal-cost">
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="recipient-name" class="col-form-label">Investment Value:</label>
+                  <input type="text" name="value" class="modal-inv-value">
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Message:</label>
-              <textarea class="form-control" id="message-text"></textarea>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Send message</button>
-        </div>
+        
       </div>
     </div>
 </div>

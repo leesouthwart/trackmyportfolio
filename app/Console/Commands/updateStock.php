@@ -52,7 +52,9 @@ class updateStock extends Command
 
         // Get all Assets
         $assets = Asset::where('is_crypto', 0)->get();
-
+        
+        $test = $client->TimeSeries()->daily('GB00BD3RZ582');
+        console.log('test');
         // Loop through assets
         foreach ($assets as $asset) {
             

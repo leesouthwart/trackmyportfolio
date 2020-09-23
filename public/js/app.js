@@ -49722,6 +49722,8 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./modal */ "./resources/js/modal.js");
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
@@ -49857,6 +49859,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/modal.js":
+/*!*******************************!*\
+  !*** ./resources/js/modal.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#transactionModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget); // Button that triggered the modal
+
+  var asset = button.data('asset'); // Extract info from data-* attributes
+
+  var asset_id = button.data('asset_id');
+  var asset_amount = button.data('asset_amount');
+  var cost = button.data('cost');
+  var transaction_id = button.data('transaction_id');
+  var inv_value = button.data('inv-val'); // Update the modal's content.
+
+  var modal = $(this);
+  modal.find('.modal-form-action').attr('action', 'transaction/' + transaction_id + '/edit');
+  modal.find('.hidden-id').val(transaction_id);
+  modal.find('.modal-title').text('Updating Transaction of ' + asset);
+  modal.find('.modal-asset-name').text(asset);
+  modal.find('.modal-asset-name').attr('value', asset);
+  modal.find('.modal-dropdown').val(asset_id);
+  modal.find('.modal-asset-amount').val(asset_amount);
+  modal.find('.modal-cost').val(cost);
+  modal.find('.modal-inv-value').val(inv_value);
+});
 
 /***/ }),
 

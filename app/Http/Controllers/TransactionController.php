@@ -16,12 +16,39 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::where('user_id', auth()->user()->id)->get();
+        $assets = Asset::pluck('asset_name', 'id')->toArray();
 
-        return view('transactions', compact('transactions'));
+        return view('transactions', compact('transactions', 'assets'));
     }
 
-    public function edit()
-    {
+    public function edit(Request $request)
+    {  
+        
+
+        $vData = $request->validate([
+            'asset_id' => 'required',
+            'cost' => 'required',
+            'value' => 'required',
+            'id' => 'required'
+        ]);
+
+        $transaction = Transaction::where('id', $vData['id'])->first();
+        $asset = Asset::where('id', $vData['asset_id'])->first();
+
+        $oldData = $transaction;
+
+        $transaction->asset_name = $asset->asset_name;
+        $transaction->asset_id = $vData['asset_id'];
+        
+        $transaction->amount_of_asset = $vData['value'] / $vData['cost'];
+        $transaction->cost = $vData['cost'];
+        $transaction->value = $vData['value'];
+
+
+        $transaction->save();
+
+
+        return redirect('/history');
         
     }
     

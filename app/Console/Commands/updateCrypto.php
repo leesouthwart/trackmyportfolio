@@ -53,6 +53,7 @@ class updateCrypto extends Command
         // Get all Assets
         $assets = Asset::where('is_crypto', 1)->get();
 
+
         // Loop through assets
         foreach ($assets as $asset) {
             
