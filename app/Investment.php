@@ -69,11 +69,12 @@ class Investment extends Model
 
 
         $amount_of_asset = ($currentInvestmentAmount - $oldTransactionAmount) + $newTransactionAmount;
-        
+
         $investment->value = $investment->value - $oldData->value;  
-        $value_invested = ($investment->amount_of_asset * $investment->average_cost) + $args['value'];
-        
-        $total_value = $investment->value  + ($args['amount_of_asset'] * $asset->current_price);
+        //dd([$investment->investment_cost, $oldData->value, $args['value']]);
+        $value_invested = ($investment->investment_cost - $oldData->value) + $args['value'];
+   
+        $total_value = $amount_of_asset * $asset->current_price;
         $gain = $total_value - $value_invested;
         $percent_gain = ($gain / $value_invested) * 100;
         
